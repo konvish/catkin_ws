@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/kong/carkin_ws/install/setup.sh

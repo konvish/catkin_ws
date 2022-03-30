@@ -1,0 +1,9 @@
+#define target message
+uint32 dishwasher_id
+#Specify which dishwasher we want to use
+---
+#define result message
+uint32 total_disher_cleaned
+---
+#define cycle response message
+float32 percent_complete

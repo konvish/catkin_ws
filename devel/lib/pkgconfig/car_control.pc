@@ -1,0 +1,8 @@
+prefix=/home/kong/carkin_ws/devel
+
+Name: car_control
+Description: Description of car_control
+Version: 0.0.0
+Cflags: -I/home/kong/carkin_ws/src/car_control/include
+Libs: -L${prefix}/lib -lcar_control
+Requires: roscpp rospy

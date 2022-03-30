@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<robot name="mbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="M_PI" value="3.1415926"/>
+    <xacro:property name="base_length" value="0.40"/>
+    <xacro:property name="base_width" value="0.20"/>
+    <xacro:property name="base_height" value="0.02"/>
+    
+    <xacro:property name="wheel_radius" value="0.06"/>
+    <xacro:property name="wheel_length" value="0.025"/>
+    <xacro:property name="wheel_joint_y" value="0.11"/>
+    <xacro:property name="wheel_joint_z" value="0.01"/>
+    
+    <material name="white">
+        <color rgba="1 1 1 0.9"/>
+    </material>
+    <material name="black">
+        <color rgba="0 0 0 0.95"/>
+    </material>
+    <material name="blue">
+        <color rgba="0 0 1 0.95"/>
+    </material>
+    
+    <xacro:macro name="wheel" params="prefix reflect">
+        <joint name="${prefix}_wheel_joint" type="continuous">
+            <origin xyz="0 ${reflect * wheel_joint_y} ${-wheel_joint_z}" rpy="0 0 0"/>
+            <parent link="base_link"/>
+            <child link="${prefix}_wheel_link"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+        <link name="${prefix}_wheel_link">
+          <visual>
+            <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length = "${wheel_length}"/>
+            </geometry>
+            <material name="black"/>
+          </visual>
+        </link>
+    </xacro:macro>
+    
+    <xacro:macro name="front">
+       <joint name="front_caster_joint" type="fixed">
+         <origin xyz="${base_length/2 - 0.05} 0 ${base_height}" rpy="0 0 0"/>
+         <parent link="base_link"/>
+         <child link="front_caster_link"/>
+         <axis xyz="0 1 0"/>
+       </joint>
+
+       <link name="front_caster_link">
+          <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <sphere radius="0.015" />
+            </geometry>
+            <material name="black"/>
+          </visual>
+        </link>
+    </xacro:macro>
+    
+    <xacro:macro name="back">
+       <joint name="back_caster_joint" type="fixed">
+         <origin xyz="${-base_length/2 + 0.05} 0 ${base_height}" rpy="0 0 0"/>
+         <parent link="base_link"/>
+         <child link="back_caster_link"/>
+         <axis xyz="0 1 0"/>
+       </joint>
+
+       <link name="back_caster_link">
+         <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.08 0.1 0.01" />
+            </geometry>
+            <material name="blue"/>
+         </visual>
+       </link>
+    </xacro:macro>
+    
+    <xacro:macro name="mbot_self">
+       <link name="base_footprint">
+            <visual>
+               <origin xyz="0 0 0" rpy="0 0 0"/>
+               <geometry>
+                    <box size="0.001 0.001 0.001"/>
+               </geometry>
+            </visual>
+       </link>
+       
+       <joint name="base_foorprint_joint" type="fixed">
+            <orgin xyz="0 0 ${base_length / 2 + base_height}" rpy="0 0 0"/>
+            <parent link="base_footprint"/>
+            <child link="base_link"/>
+       </joint>
+    
+       <link name="base_link">
+        <visual>
+            <origin xyz=" 0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="${base_length} ${base_width} ${base_height}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+       </link>
+       <xacro:wheel prefix="left" reflect="-1"/>
+       <xacro:wheel prefix="right" reflect="1"/>
+       
+       <xacro:front />
+       <xacro:back />
+    </xacro:macro>
+</robot>

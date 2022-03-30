@@ -1,0 +1,2 @@
+car_control:learning_communication:marm_description:marm_gazebo:marm_moveit_config:marm_planning:mbot_bringup:mbot_description:mbot_gazebo:mbot_navigation:mbot_teleop:robot_vision:robot_voice
+-DCATKIN_DEVEL_PREFIX=/home/kong/carkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/kong/carkin_ws/install -G Unix Makefiles

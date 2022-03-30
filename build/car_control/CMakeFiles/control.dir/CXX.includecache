@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kong/carkin_ws/src/car_control/src/control.cpp
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+errno.h
+-
+string.h
+-
+netdb.h
+-
+sys/types.h
+-
+time.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+
